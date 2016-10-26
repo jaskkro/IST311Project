@@ -1,8 +1,10 @@
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class LoginPanel extends JPanel {
+public class LoginPanel extends JPanel implements ActionListener{
 
         private JTextField username;
         private JPasswordField password;
@@ -36,7 +38,23 @@ public class LoginPanel extends JPanel {
             add(password);
             add(submit);
             add(newUser);
+            
+            submit.addActionListener(this);
+            newUser.addActionListener(this);
            
         }
+        
 
-}
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+             if(ae.getSource()== newUser)
+            {
+                new NewUser().setVisible(true);
+            } 
+            if (ae.getSource() == submit)
+             {
+                 
+             }       
+        }
+    }
+
