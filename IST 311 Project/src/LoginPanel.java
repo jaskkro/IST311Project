@@ -51,7 +51,7 @@ public class LoginPanel extends JPanel implements ActionListener{
             {
                 new NewUser().setVisible(true);
             } 
-             else if (ae.getSource() == submit)
+            if (ae.getSource() == submit)
              {
                  
              }       
