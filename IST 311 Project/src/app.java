@@ -1,6 +1,6 @@
 public class app {
   
-    private static Database firstdb;
+    private static Database activeDB;
 
     public static void main(String[] args) {
   
@@ -10,7 +10,7 @@ public class app {
     }
     
     public static void setDatabase(Database newdb) {
-        firstdb = newdb;
+        activeDB = newdb;
     }
     
     

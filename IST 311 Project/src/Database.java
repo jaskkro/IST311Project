@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,12 +13,13 @@
  */
 public class Database {
     
-    String firstName;
-    String lastName;
-    String userName;
-    String password;
-    String securityQuestion;
-    String securityAnswer;
+    private String firstName;
+    private String lastName;
+    private String userName;
+    private String password;
+    private String securityQuestion;
+    private String securityAnswer;
+    private ArrayList<Credential> credentials;
     
     public Database(String fn, String ln, String un, String pw, String q, String a) {
         
@@ -25,11 +29,21 @@ public class Database {
         password = pw;
         securityQuestion = q;
         securityAnswer = a;
+        credentials = new ArrayList<>();
     }
     
-    public boolean verifyCredentials(String us, String pw) {
-        if (us.equals(userName) && pw.equals(password))
-            return true;
-        return false;
+    //When logging into program, check username and password validity with this
+    public boolean verifyLoginCredentials(String us, String pw) {
+        return us.equals(userName) && pw.equals(password);
+    }
+    
+    //First step in displaying credentials on Main Menu, use along with getCredential calls in for loop.
+    public ArrayList<Credential> getCredentials() {
+        return credentials;
+    }
+    
+    //Call this when adding a created credential to the active database in App
+    public void addNewCredential(Credential toAdd) {
+        credentials.add(toAdd);
     }
 }
