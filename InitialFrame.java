@@ -5,13 +5,13 @@ import javax.swing.*;
 public class InitialFrame extends JFrame {
 
     public InitialFrame() {
-        super("PManagement");
+        super("Password Management");
 
         LoginPanel lp = new LoginPanel();
         add(lp);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(350, 150);
+        setSize(1000, 500);
         setResizable(false);
         setVisible(true);
     }
