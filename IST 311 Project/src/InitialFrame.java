@@ -1,6 +1,10 @@
-
 import java.awt.*;
 import javax.swing.*;
+
+/**
+ *
+ * @author Ben
+ */
 
 public class InitialFrame extends JFrame {
 
