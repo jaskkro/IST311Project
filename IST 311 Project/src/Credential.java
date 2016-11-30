@@ -1,7 +1,8 @@
 
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,15 +27,15 @@ public class Credential {
         credentialTitle = ctl;
         userName = un;
         emailAddress = ea;
-        LocalDate dlu = LocalDate.now();
-        dateLastUpdated = dlu.toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateLastUpdated = sdf.format(new Date());
         credentialPassword = np;
         note = n;
     }
     
     //This returns the credential information in an array list that can be extracted where needed
     public ArrayList<String> getCredentialInfo(){
-        ArrayList<String> credentialsForReturn = new ArrayList<>();
+        ArrayList<String> credentialsForReturn = new ArrayList();
         
         credentialsForReturn.add(credentialTitle);
         credentialsForReturn.add(userName);

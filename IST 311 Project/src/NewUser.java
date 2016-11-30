@@ -1,8 +1,5 @@
-
-import java.awt.Color;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 
 /*
@@ -14,7 +11,7 @@ import javax.swing.*;
  *
  * @author Ethan
  */
-public class NewUser extends JFrame {
+public class NewUser extends JFrame implements ActionListener {
 
     private static final int FRAME_WIDTH = 450;
     private static final int FRAME_HEIGHT = 450;
@@ -34,13 +31,14 @@ public class NewUser extends JFrame {
     private JTextField SecurityQuestion;
     private JLabel SecurityAnswerLabel;
     private JTextField SecurityAnswer;
+    public static Database database;
 
     /**
      * Creates new form NewJFrame
      */
     public NewUser() {
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
         FirstName = new JTextField(20);
@@ -64,7 +62,11 @@ public class NewUser extends JFrame {
         //Jbuttons
         CreateUsername = new JButton("Submit");
         Cancel = new JButton("Cancel");
-        this.add(createPanel());
+        this.add(createPanel()); 
+        
+        //actionlisteners
+        CreateUsername.addActionListener(this);
+        Cancel.addActionListener(this);
 
     }
 
@@ -88,4 +90,18 @@ public class NewUser extends JFrame {
         panel.add(Cancel);
         return panel;
     }
+
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == CreateUsername) {
+        	database = new Database(FirstName.getText(), LastName.getText(), Username.getText(), UsernamePassword.getText(), SecurityQuestion.getText(), SecurityAnswer.getText());
+        	JOptionPane.showMessageDialog(null,"Operation is successful");
+        	this.setVisible(false);
+        }
+        if (ae.getSource() == Cancel) {
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+    }
+    
+    
 }
+

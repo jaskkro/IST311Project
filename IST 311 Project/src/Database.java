@@ -20,7 +20,6 @@ public class Database {
     private String securityQuestion;
     private String securityAnswer;
     private ArrayList<Credential> credentials;
-    
     public Database(String fn, String ln, String un, String pw, String q, String a) {
         
         firstName = fn;
@@ -29,7 +28,7 @@ public class Database {
         password = pw;
         securityQuestion = q;
         securityAnswer = a;
-        credentials = new ArrayList<>();
+        credentials = new ArrayList<Credential>();
     }
     
     //When logging into program, check username and password validity with this
