@@ -7,6 +7,11 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  * @author Ben
  */
 
+/**
+ *
+ * @author Ben
+ */
+
 public class InitialFrame extends JFrame {
 
     public InitialFrame() {
