@@ -31,12 +31,12 @@ public class MainUI extends JFrame {
     JTable table = new JTable(model);
     getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
     CreateNewCredential = new JButton("Create New Credential");
-    password = new JButton("Create password");
+    password = new JButton("Generate Rondom Password");
     password.addActionListener(new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null,"Random password: "+genRandomNum());
+			JOptionPane.showMessageDialog(null,"Random password: "+genRandomPwd());
 		}
 	});
     JPanel jp = new JPanel();
@@ -47,21 +47,23 @@ public class MainUI extends JFrame {
 
   }
 
-  public static String genRandomNum(){
-	  //35æ˜¯å› ä¸ºæ•°ç»„æ˜¯ä»Ž0å¼€å§‹çš„ï¼Œ26ä¸ªå­—æ¯�+10ä¸ªæ•°å­—
-	  final int  maxNum = 36;
-	  int i;  //ç”Ÿæˆ�çš„éš�æœºæ•°
-	  int count = 0; //ç”Ÿæˆ�çš„å¯†ç �çš„é•¿åº¦
-	  char[] str = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+  public static String genRandomPwd(){
+	  
+	  final int  maxNum = 62;
+	  int i;  
+	  int count = 0; 
+	  char[] str = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+	    'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
+	    'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
 	    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
 	    'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	  
 	  StringBuffer pwd = new StringBuffer("");
 	  Random r = new Random();
-	  while(count < 10){
-	   //ç”Ÿæˆ�éš�æœºæ•°ï¼Œå�–ç»�å¯¹å€¼ï¼Œé˜²æ­¢ç”Ÿæˆ�è´Ÿæ•°ï¼Œ
+	  while(count < 15){
+
 	   
-	   i = Math.abs(r.nextInt(maxNum));  //ç”Ÿæˆ�çš„æ•°æœ€å¤§ä¸º36-1
+	   i = Math.abs(r.nextInt(maxNum));  
 	   
 	   if (i >= 0 && i < str.length) {
 	    pwd.append(str[i]);

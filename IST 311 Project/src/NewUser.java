@@ -94,7 +94,7 @@ public class NewUser extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == CreateUsername) {
         	database = new Database(FirstName.getText(), LastName.getText(), Username.getText(), UsernamePassword.getText(), SecurityQuestion.getText(), SecurityAnswer.getText());
-        	JOptionPane.showMessageDialog(null,"Operation is successful");
+        	JOptionPane.showMessageDialog(null,"Account Created Successfully.");
         	this.setVisible(false);
         }
         if (ae.getSource() == Cancel) {
