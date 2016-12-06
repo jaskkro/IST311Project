@@ -1,10 +1,10 @@
 public class app {
   
     private static Database activeDB;
-
+    public static  InitialFrame mjf ;
     public static void main(String[] args) {
   
-        InitialFrame mjf = new InitialFrame();
+         mjf = new InitialFrame();
         
         
     }
@@ -13,5 +13,8 @@ public class app {
         activeDB = newdb;
     }
     
-    
+    public static void setInvisible()
+    {
+        mjf.setVisible(false);
+    }
 }

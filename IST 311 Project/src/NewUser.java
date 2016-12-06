@@ -1,5 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import javax.swing.*;
 
 /*
@@ -12,7 +15,7 @@ import javax.swing.*;
  * @author Ethan
  */
 public class NewUser extends JFrame implements ActionListener {
-
+    
     private static final int FRAME_WIDTH = 450;
     private static final int FRAME_HEIGHT = 450;
     private JButton CreateUsername;
@@ -32,7 +35,7 @@ public class NewUser extends JFrame implements ActionListener {
     private JLabel SecurityAnswerLabel;
     private JTextField SecurityAnswer;
     public static Database database;
-
+    
     /**
      * Creates new form NewJFrame
      */
@@ -92,13 +95,87 @@ public class NewUser extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae) {
+        
         if (ae.getSource() == CreateUsername) {
-        	database = new Database(FirstName.getText(), LastName.getText(), Username.getText(), UsernamePassword.getText(), SecurityQuestion.getText(), SecurityAnswer.getText());
-        	JOptionPane.showMessageDialog(null,"Account Created Successfully.");
+        	//Following is to check the text filed is not empty
+                if(FirstName.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Your first name entry is empty","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if(LastName.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Your last name entry is empty","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if(Username.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Your Account entry is empty","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                 if(String.valueOf(UsernamePassword.getPassword()).equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Your password entry is empty","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                 if(String.valueOf(confirmUsernamePassword.getPassword()).equals(""))
+                 {
+                    JOptionPane.showMessageDialog(null,"Your confirmed password entry is empty","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;                     
+                 }
+                    if(SecurityQuestion.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Your security question entry is empty","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                 if(SecurityAnswer.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Your security answer is empty","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                 
+                 if(new File(Username.getText() +".ser").exists())
+                 {
+                    JOptionPane.showMessageDialog(null,"Your account is existed","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                 }
+                if(!(String.valueOf(UsernamePassword.getPassword()).equals(String.valueOf(confirmUsernamePassword.getPassword()))))
+                {
+                    JOptionPane.showMessageDialog(null,"Your confirmed password does not matach","Failed",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                System.out.print(UsernamePassword.getPassword());
+                
+                
+                
+                database = new Database(FirstName.getText(), LastName.getText(), 
+                                        Username.getText(), 
+                                        String.valueOf(UsernamePassword.getPassword()), 
+                                        SecurityQuestion.getText(), SecurityAnswer.getText());
+        	writeToSer(Username.getText());
+                JOptionPane.showMessageDialog(null,"Account Created Successfully.");
         	this.setVisible(false);
+                
         }
         if (ae.getSource() == Cancel) {
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+    }
+      private void writeToSer(String un) {
+        try{
+            FileOutputStream fo = new FileOutputStream(un+".ser");
+            ObjectOutputStream os = new ObjectOutputStream(fo);
+            os.writeObject(database);
+            os.close();
+            fo.close();
+
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Cant not save your info into local", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.print(e);
+            return;
         }
     }
     

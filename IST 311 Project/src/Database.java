@@ -1,5 +1,12 @@
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author Big Bertha
  */
-public class Database {
+public class Database implements Serializable {
     
     private String firstName;
     private String lastName;
@@ -22,13 +29,19 @@ public class Database {
     private ArrayList<Credential> credentials;
     public Database(String fn, String ln, String un, String pw, String q, String a) {
         
-        firstName = fn;
-        lastName = ln;
-        userName = un;
-        password = pw;
-        securityQuestion = q;
-        securityAnswer = a;
-        credentials = new ArrayList<Credential>();
+        this.firstName = fn;
+        this.lastName = ln;
+        this.userName = un;
+        this.password = pw;
+        this.securityQuestion = q;
+        this.securityAnswer = a;
+        this.credentials = new ArrayList<Credential>();
+       /*System.out.println("firstName"+ firstName+
+                "Lastname:" + lastName+ 
+                "UserName:" + userName+
+                "Password: "+ password+
+                "SQ: "+securityQuestion+
+                       "SA"+ securityAnswer);*/
     }
     
     //When logging into program, check username and password validity with this
@@ -45,4 +58,16 @@ public class Database {
     public void addNewCredential(Credential toAdd) {
         credentials.add(toAdd);
     }
+    
+    public boolean accountExisted(String userName)
+    {
+        if(new File(userName+".ser").exists())
+        {
+            return true;
+        }
+        else 
+            return false;
+    }
+
+
 }
