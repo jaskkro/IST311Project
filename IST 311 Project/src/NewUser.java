@@ -41,7 +41,7 @@ public class NewUser extends JFrame implements ActionListener {
      */
     public NewUser() {
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setVisible(true);
 
         FirstName = new JTextField(20);

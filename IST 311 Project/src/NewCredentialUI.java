@@ -1,5 +1,3 @@
-
-import java.awt.Color;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +42,7 @@ public class NewCredentialUI extends JFrame implements ActionListener{
      */
     public NewCredentialUI() {
             this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-            //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             this.setVisible(true);
             
             //TextFields
@@ -107,16 +105,9 @@ public class NewCredentialUI extends JFrame implements ActionListener{
              //password button listener
              if(ac.getSource()== GenPassword)
              {
-		//JOptionPane.showMessageDialog(null,"Random password: "+ genRandomPwd());
                  String temp_gen = genRandomPwd();
                 CredentialPassword.setText(temp_gen);
-             }
-             
-            if(ac.getSource()== Cancel){
-                System.out.println("Cancel"); 
-            }
-    
-            
+             }          
         }
         
     public static String genRandomPwd() {

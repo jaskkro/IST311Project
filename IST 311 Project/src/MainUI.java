@@ -1,17 +1,6 @@
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Random;
-
-import javax.swing.JButton;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.awt.event.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class MainUI extends JFrame {
@@ -25,7 +14,7 @@ public class MainUI extends JFrame {
   private JButton Logout;
 
   public MainUI() {
-      this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+    this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JTable table = new JTable(model);
     getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
@@ -40,17 +29,15 @@ public class MainUI extends JFrame {
     Logout.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent ae) {
-              
-          }
-        
+            JOptionPane.showMessageDialog(null, "Logout Successful");
+            System.exit(0);        
+        }       
     });
-    
-    
+       
     JPanel jp = new JPanel();
     jp.add(CreateNewCredential);
     jp.add(Logout);
     this.add(jp, BorderLayout.SOUTH);
     
-
   }
 }
