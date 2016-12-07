@@ -16,6 +16,7 @@ import java.util.Date;
  */
 public class Credential {
     
+    private Integer ID;
     private String credentialTitle;
     private String userName;
     private String emailAddress;
@@ -24,6 +25,7 @@ public class Credential {
     private String note;
     
     public Credential(String ctl, String un, String ea, Password np, String n){
+        ID = app.getCurrentID();
         credentialTitle = ctl;
         userName = un;
         emailAddress = ea;
@@ -34,15 +36,32 @@ public class Credential {
     }
     
     //This returns the credential information in an array list that can be extracted where needed
-    public ArrayList<String> getCredentialInfo(){
+    //All data fields are provided from this method
+    public ArrayList<String> getFullCredInfo(){
         ArrayList<String> credentialsForReturn = new ArrayList();
         
+        credentialsForReturn.add(ID.toString());
         credentialsForReturn.add(credentialTitle);
         credentialsForReturn.add(userName);
         credentialsForReturn.add(emailAddress);
         credentialsForReturn.add(dateLastUpdated);
         credentialsForReturn.add(credentialPassword.getPassword());
         credentialsForReturn.add(note);
+        
+        return credentialsForReturn;
+    }
+    
+    //This method provides an appended array list for use in undetailed main UI table
+    public ArrayList<String> getPartialCredInfo(){
+        ArrayList<String> credentialsForReturn = new ArrayList();
+        
+        credentialsForReturn.add(ID.toString());
+        credentialsForReturn.add(credentialTitle);
+        credentialsForReturn.add(userName);
+        //credentialsForReturn.add(emailAddress);
+        //credentialsForReturn.add(dateLastUpdated);
+        credentialsForReturn.add(credentialPassword.getPassword());
+        //credentialsForReturn.add(note);
         
         return credentialsForReturn;
     }

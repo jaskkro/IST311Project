@@ -24,7 +24,7 @@ public class NewCredentialUI extends JFrame implements ActionListener{
     private JButton Cancel;
     
     private JLabel CredentialTypeLabel;
-    private JTextField CredentialType;
+    private JTextField CredentialTitle;
     private JLabel UsernameCredentialLabel;
     private JTextField CredentialUsername;
     
@@ -46,16 +46,16 @@ public class NewCredentialUI extends JFrame implements ActionListener{
             this.setVisible(true);
             
             //TextFields
+            CredentialTitle = new JTextField(20);
             CredentialUsername = new JTextField(20);
             CredentialPassword = new JTextField(20);
-            CredentialType = new JTextField(20);
             CredentialEmail = new JTextField(20);
             CredentialNote = new JTextField(20);
             
             //JLabels
+            CredentialTypeLabel = new JLabel("Title:");
             UsernameCredentialLabel = new JLabel("Username:");
             CredentialPasswordLabel = new JLabel("Password:");
-            CredentialTypeLabel = new JLabel("Type:");
             CredentialEmailLabel = new JLabel("Email:");
             CredentialUserNoteLabel = new JLabel("Notes:");
             
@@ -67,11 +67,7 @@ public class NewCredentialUI extends JFrame implements ActionListener{
             GenPassword.addActionListener(this);
             Cancel.addActionListener(this);
             this.add(createPanel());
-            
-            
-            
-
-        
+                   
     }
     private JPanel createPanel() 
 	{
@@ -81,7 +77,7 @@ public class NewCredentialUI extends JFrame implements ActionListener{
                 panel.add(CredentialPasswordLabel);
                 panel.add(CredentialPassword);
                 panel.add(CredentialTypeLabel);
-                panel.add(CredentialType);
+                panel.add(CredentialTitle);
                 panel.add(CredentialEmailLabel);
                 panel.add(CredentialEmail);
                 panel.add(CredentialUserNoteLabel);
@@ -91,16 +87,21 @@ public class NewCredentialUI extends JFrame implements ActionListener{
 		return panel;
 	}
     
-         
+         //Submit new credential pressed
         public void actionPerformed(ActionEvent ac) {
              if(ac.getSource()== CreateCredential)
             {
-                 String credentialType = CredentialType.getText();
+                 String credentialTitle = CredentialTitle.getText();
                  String username = CredentialUsername.getText();
                  String email = CredentialEmail.getText();
                  String credentialPassword = CredentialPassword.getText();
                  String note = CredentialNote.getText();
-                 Credential credential = new Credential(credentialType, username, email, new Password(credentialPassword), note);
+                 Credential credential = new Credential(credentialTitle, username, email, new Password(credentialPassword), note);
+                 
+                 app.appendCredential(credential);
+                 MainUI.setCredDisplay();
+                 //this.Cancel.doClick();
+
              }
              //password button listener
              if(ac.getSource()== GenPassword)
@@ -110,6 +111,7 @@ public class NewCredentialUI extends JFrame implements ActionListener{
              }          
         }
         
+        //This needs to be its own class (move)
     public static String genRandomPwd() {
 
         final int maxNum = 62;

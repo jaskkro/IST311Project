@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Big Bertha
+ * @author Jacob P. Fodor
  */
 public class Database implements Serializable {
     
@@ -27,6 +27,9 @@ public class Database implements Serializable {
     private String securityQuestion;
     private String securityAnswer;
     private ArrayList<Credential> credentials;
+    private int credID;
+    
+    
     public Database(String fn, String ln, String un, String pw, String q, String a) {
         
         this.firstName = fn;
@@ -36,12 +39,7 @@ public class Database implements Serializable {
         this.securityQuestion = q;
         this.securityAnswer = a;
         this.credentials = new ArrayList<Credential>();
-       /*System.out.println("firstName"+ firstName+
-                "Lastname:" + lastName+ 
-                "UserName:" + userName+
-                "Password: "+ password+
-                "SQ: "+securityQuestion+
-                       "SA"+ securityAnswer);*/
+        this.credID = 0;
     }
     
     //When logging into program, check username and password validity with this
@@ -59,6 +57,7 @@ public class Database implements Serializable {
         credentials.add(toAdd);
     }
     
+    //Previous existence check
     public boolean accountExisted(String userName)
     {
         if(new File(userName+".ser").exists())
@@ -68,6 +67,13 @@ public class Database implements Serializable {
         else 
             return false;
     }
+    
+    //Send count to Credential constructor to be primary key
+    public int getCredID() {
+        credID++;
+        return credID - 1;
+    }
+
 
 
 }

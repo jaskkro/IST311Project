@@ -16,7 +16,6 @@ import javax.swing.*;
 public class LoginPanel extends JPanel implements ActionListener {
 
     //access to database
-    private Database loginDB;
 
     private JTextField username;
     private JPasswordField password;
@@ -78,11 +77,11 @@ public class LoginPanel extends JPanel implements ActionListener {
         }
         else if (getInfo() == 3)
         {
-             JOptionPane.showMessageDialog(null, "No Such User", "Fetal Error", JOptionPane.ERROR_MESSAGE);
+             JOptionPane.showMessageDialog(null, "No Such User", "Fatal Error", JOptionPane.ERROR_MESSAGE);
         }
         else if(getInfo() == 4)
         {
-            JOptionPane.showMessageDialog(null,"Cant read the file","Fetal Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Cant read the file","Fatal Error",JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -120,6 +119,7 @@ public class LoginPanel extends JPanel implements ActionListener {
             db = (Database)oi.readObject();
             oi.close();
             fi.close();
+            app.setDatabase(db);
         }
         catch(FileNotFoundException e)
         {
