@@ -101,8 +101,6 @@ public class NewCredentialUI extends JFrame implements ActionListener{
                  String credentialPassword = CredentialPassword.getText();
                  String note = CredentialNote.getText();
                  Credential credential = new Credential(credentialType, username, email, new Password(credentialPassword), note);
-                 
-                 this.setVisible(false);
              }
              //password button listener
              if(ac.getSource()== GenPassword)
