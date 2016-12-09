@@ -1,5 +1,6 @@
 
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,9 +15,9 @@ import java.util.Date;
  *
  * @author Big Bertha
  */
-public class Credential {
+public class Credential implements Serializable{
     
-    private Integer ID;
+    private String ID;
     private String credentialTitle;
     private String userName;
     private String emailAddress;
@@ -65,5 +66,70 @@ public class Credential {
         
         return credentialsForReturn;
     }
-    
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getCredentialTitle() {
+        return credentialTitle;
+    }
+
+    public void setCredentialTitle(String credentialTitle) {
+        this.credentialTitle = credentialTitle;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getDateLastUpdated() {
+        return dateLastUpdated;
+    }
+
+    public void setDateLastUpdated(String dateLastUpdated) {
+        this.dateLastUpdated = dateLastUpdated;
+    }
+
+    public Password getCredentialPassword() {
+        return credentialPassword;
+    }
+
+    public void setCredentialPassword(Password credentialPassword) {
+        this.credentialPassword = credentialPassword;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+    public String toString()
+    {
+        return "ID: "+ ID+ "\n"+
+   "Credential title: "+ credentialTitle+"\n"+
+   "User Name: " + userName+"\n"+
+    "Email Address: " + emailAddress+"\n"+
+    "Data Last Update: "+ dateLastUpdated+"\n"+
+    "Credential Password: "+ credentialPassword.getPassword()+"\n"+
+    "Note: " +note + "\n";
+    }
 }

@@ -10,7 +10,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class InitialFrame extends JFrame {
 
     public InitialFrame() {
-        super("PManagement");
+        super("Log In");
         LoginPanel lp = new LoginPanel();
         this.add(lp);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

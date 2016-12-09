@@ -20,8 +20,8 @@ public class app {
         activeDB = toSetDB;
     }
     
-    public static int getCurrentID(){
-        return activeDB.getCredID();
+    public static String getCurrentID(){
+        return activeDB.getUserName();
     }
     
     public static void setInvisible()

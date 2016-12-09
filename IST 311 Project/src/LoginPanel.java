@@ -53,6 +53,7 @@ public class LoginPanel extends JPanel implements ActionListener {
         
         submit.addActionListener(this);
         newUser.addActionListener(this);
+        
     }
 
     private String getUsername() {
@@ -61,7 +62,7 @@ public class LoginPanel extends JPanel implements ActionListener {
     }
 
     private String getPassword() {
-        String temp_pass = password.getText();
+        String temp_pass = String.valueOf(password.getPassword());
         return temp_pass;
     }
 
@@ -120,6 +121,7 @@ public class LoginPanel extends JPanel implements ActionListener {
             oi.close();
             fi.close();
             app.setDatabase(db);
+            
         }
         catch(FileNotFoundException e)
         {
@@ -127,6 +129,7 @@ public class LoginPanel extends JPanel implements ActionListener {
         }
         catch(Exception en)
         {    
+            System.out.println(en);
             return 4;
             
         }

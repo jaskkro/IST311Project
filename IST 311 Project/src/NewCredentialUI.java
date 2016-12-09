@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Random;
 import javax.swing.*;
 
@@ -16,7 +17,7 @@ import javax.swing.*;
  * @author Ethan
  */
 public class NewCredentialUI extends JFrame implements ActionListener{
-    private static final int FRAME_WIDTH = 450;
+    private static final int FRAME_WIDTH = 550;
     private static final int FRAME_HEIGHT = 450;
     private MainUI Main;
     private JButton CreateCredential;
@@ -67,6 +68,8 @@ public class NewCredentialUI extends JFrame implements ActionListener{
             GenPassword.addActionListener(this);
             Cancel.addActionListener(this);
             this.add(createPanel());
+            this.setTitle("New Credential");
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                    
     }
     private JPanel createPanel() 
@@ -96,11 +99,34 @@ public class NewCredentialUI extends JFrame implements ActionListener{
                  String email = CredentialEmail.getText();
                  String credentialPassword = CredentialPassword.getText();
                  String note = CredentialNote.getText();
-
+                 if(credentialTitle.equals(""))
+                 {
+                     JOptionPane.showMessageDialog(null, "You did not enter credential title", "Warning ",JOptionPane.ERROR_MESSAGE);
+                     return;
+                 }
+                  if(username.equals(""))
+                 {
+                     JOptionPane.showMessageDialog(null, "You did not enter user name", "Warning ",JOptionPane.ERROR_MESSAGE);
+                     return;                     
+                 }
+                  if(email.equals(""))
+                 {
+                     JOptionPane.showMessageDialog(null, "You did not enter email", "Warning ",JOptionPane.ERROR_MESSAGE);
+                     return;                     
+                 }
+                  if(credentialPassword .equals(""))
+                 {
+                     JOptionPane.showMessageDialog(null, "You did not enter credential password ", "Warning ",JOptionPane.ERROR_MESSAGE);
+                     return;                     
+                 }
+                  
+                
                  Credential credential = new Credential(credentialTitle, username, email, new Password(credentialPassword), note);
                  
                  app.appendCredential(credential);
-                 MainUI.setCredDisplay();
+                 MainUI.addRows(email,credentialTitle,username,credentialPassword);
+                 this.dispose();
+                // System.out.println(app.activeDB.getCredentials().toString());
                  //this.Cancel.doClick();
 
 
@@ -109,7 +135,7 @@ public class NewCredentialUI extends JFrame implements ActionListener{
              if(ac.getSource()== GenPassword)
              {
                  String temp_gen = GeneratePwd.genRandomPwd();
-                CredentialPassword.setText(temp_gen);
+                 CredentialPassword.setText(temp_gen);
              }          
         }
 
