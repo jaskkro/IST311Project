@@ -26,7 +26,7 @@ public class searchResult {
         
         f.add(jta);
         f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         f.setResizable(false);
     }
 }

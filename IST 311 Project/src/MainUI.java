@@ -61,8 +61,7 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
     Logout.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int answer = 0;
-            JOptionPane.showConfirmDialog (null, "Would You Like to Save your credentials?","Warning",JOptionPane.YES_NO_CANCEL_OPTION);
+            int answer = JOptionPane.showConfirmDialog (null, "Would You Like to Save your credentials?","Warning",JOptionPane.YES_NO_CANCEL_OPTION);
             if(answer==JOptionPane.YES_OPTION)
             {
                 savingCredential();
@@ -74,10 +73,10 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
                 ui.dispose();
                  app.main(new String[0]);
             }
-
-           
-            
-            
+            else if (answer == JOptionPane.CANCEL_OPTION)
+            {
+                
+            }
         }
     } 
    );
@@ -186,7 +185,7 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
         }
         else if(e.getSource()==search)
         {
-            String id = JOptionPane.showInputDialog(null, "Searched by the username", "Searching",JOptionPane.QUESTION_MESSAGE);
+            String id = JOptionPane.showInputDialog(null, "Enter ID:", "Searching",JOptionPane.QUESTION_MESSAGE);
             search(id);
         }
         

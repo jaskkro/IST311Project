@@ -136,7 +136,7 @@ public class NewUser extends JFrame implements ActionListener {
                  
                  if(new File(Username.getText() +".ser").exists())
                  {
-                    JOptionPane.showMessageDialog(null,"Your account is existed","Failed",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Account already exists","Failed",JOptionPane.ERROR_MESSAGE);
                     return;
                  }
                 if(!(String.valueOf(UsernamePassword.getPassword()).equals(String.valueOf(confirmUsernamePassword.getPassword()))))
