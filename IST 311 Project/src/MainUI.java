@@ -230,7 +230,22 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
 
 
     private void updateArrayList(int row, int col) {
-        app.activeDB.getCredentials().get(row).getPartialCredInfo().get(col).equals(table.getValueAt(row, col));
+        if(col == 0)
+        {
+           app.activeDB.getCredentials().get(row).setID(table.getValueAt(row, col).toString());
+        }
+        if(col == 1)
+        {
+            app.activeDB.getCredentials().get(row).setCredentialTitle(table.getValueAt(row, col).toString());
+        }
+        if(col == 2)
+        {
+            app.activeDB.getCredentials().get(row).setUserName(table.getValueAt(row, col).toString());
+        }
+        if(col == 3)
+        {
+            app.activeDB.getCredentials().get(row).setCredentialPassword(new Password(table.getValueAt(row, col).toString()));
+        }
     }
 
     private void search(String id) {
