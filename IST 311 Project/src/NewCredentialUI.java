@@ -1,8 +1,13 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Date;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /*
@@ -121,9 +126,19 @@ public class NewCredentialUI extends JFrame implements ActionListener{
                  }
                   
                 
-                 Credential credential = new Credential(credentialTitle, username, email, new Password(credentialPassword), note);
+                 Credential credential;
+                 try {
+                     credential = new Credential(credentialTitle, username, email, new Password(credentialPassword), note);
+                     app.appendCredential(credential);
+                 } catch (FileNotFoundException ex) {
+                     Logger.getLogger(NewCredentialUI.class.getName()).log(Level.SEVERE, null, ex);
+                 } catch (IOException ex) {
+                     Logger.getLogger(NewCredentialUI.class.getName()).log(Level.SEVERE, null, ex);
+                 } catch (GeneralSecurityException ex) {
+                     Logger.getLogger(NewCredentialUI.class.getName()).log(Level.SEVERE, null, ex);
+                 }
                  
-                 app.appendCredential(credential);
+                 
                  MainUI.addRows(email,credentialTitle,username,credentialPassword);
                  this.dispose();
                 // System.out.println(app.activeDB.getCredentials().toString());

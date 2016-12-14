@@ -1,12 +1,16 @@
 
 import java.awt.BorderLayout;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.lang.String;
+import java.security.GeneralSecurityException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
@@ -32,9 +36,9 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
     private static JButton save;
     private JMenuItem d;
     private JButton search;
-    public MainUI() {
+    public MainUI() throws GeneralSecurityException, UnsupportedEncodingException {
 
-
+    app.createCrypt();
     setCredDisplay();
     save = new JButton("Save");
     save.setEnabled(false);
@@ -185,7 +189,7 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
         }
         else if(e.getSource()==search)
         {
-            String id = JOptionPane.showInputDialog(null, "Enter ID:", "Searching",JOptionPane.QUESTION_MESSAGE);
+            String id = JOptionPane.showInputDialog(null, "Enter Username:", "Searching",JOptionPane.QUESTION_MESSAGE);
             search(id);
         }
         
@@ -218,8 +222,16 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
                             {
                                 return;
                             }
-                           // System.out.println(row + " " + col);
-                            updateArrayList(row,col);
+        try {
+            // System.out.println(row + " " + col);
+            updateArrayList(row,col);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (GeneralSecurityException ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
                             save.setEnabled(true);
                             changed = true;
              }
@@ -229,7 +241,7 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
   
 
 
-    private void updateArrayList(int row, int col) {
+    private void updateArrayList(int row, int col) throws FileNotFoundException, IOException, GeneralSecurityException {
         if(col == 0)
         {
            app.activeDB.getCredentials().get(row).setID(table.getValueAt(row, col).toString());
@@ -249,15 +261,18 @@ public class MainUI extends JFrame implements ActionListener,TableModelListener{
     }
 
     private void search(String id) {
+        boolean found = false;
         for(int i = 0; i< app.activeDB.getCredentials().size();i++)
         {
             if(app.activeDB.getCredentials().get(i).getUserName().equals(id))
             {
                 new searchResult(app.activeDB.getCredentials().get(i).toString());
+                found = true;
             }
-            else
-                JOptionPane.showMessageDialog(null, "No such credentials", "Not found", JOptionPane.PLAIN_MESSAGE);
+            
         }
+        if (!found)
+            JOptionPane.showMessageDialog(null, "No such credentials", "Not found", JOptionPane.PLAIN_MESSAGE);
     }
 
 

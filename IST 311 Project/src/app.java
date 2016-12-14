@@ -1,4 +1,5 @@
-
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 //Class for initialization and primary holder of active database and responsibilities
@@ -6,13 +7,12 @@ public class app {
   
     //Active database reference for entire program
     public static Database activeDB;
-    
+    public static AESCrypt encrypter; 
     public static  InitialFrame mjf ;
+    
     public static void main(String[] args) {
   
          mjf = new InitialFrame();
-        
-        
     }
     
     //Assigns active database to application, be it new or loaded from file
@@ -35,5 +35,9 @@ public class app {
     
     public static void appendCredential(Credential toAdd) {
         activeDB.addNewCredential(toAdd);
+    }
+    
+    public static void createCrypt() throws GeneralSecurityException, UnsupportedEncodingException {
+        encrypter = new AESCrypt(activeDB.getPassword());
     }
 }
